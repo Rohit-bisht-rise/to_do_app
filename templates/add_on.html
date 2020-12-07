@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}	
+
+	<div class="container my-5">
+		<form method="POST" action="save/">
+			{% csrf_token %}
+			<div class="form-group">
+				<div class="row m-2">
+					<div class="col">
+						<label class="text-lg-right font-weight-bold text-uppercase" for="tasktitle"><h3>Title :</h3></label>
+					</div>
+					<div class="col-9">
+						<input type="text" class="form-control form-control-lg" id="tasktitle" name="tasktitle" placeholder="Title">
+					</div>
+				</div>
+				<div class="row m-2">
+					<div class="col">
+						<textarea class="form-control" name="description" rows="5" placeholder="Add description"></textarea>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="mx-auto">
+					<input class="btn-lg btn-outline-success" type="submit" value="SAVE">
+					</div>
+				</div>
+			 </div>	
+		</form>	
+	</div>
+	
+		
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<form action="cancel/" method="post">
+					{% csrf_token %}
+					<div class="form-group">
+						<div class="row">
+							<div class="mx-auto">
+								<input class="btn-lg btn-outline-danger" type="submit" value="BACK">
+							</div>
+						</div>
+					</div>
+				</form>	
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

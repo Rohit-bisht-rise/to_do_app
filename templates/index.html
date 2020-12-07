@@ -1,47 +1,50 @@
 {% extends "base.html" %}
+{% block content %}	
 
-{% block content %}
-	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<a class="navbar-brand" href="#">TODO LIST</a>
-		</nav>
+	<div class="jumbotron jumbotron-fluid">
+	  <div class="container">
+		<h1 class="display-4">A todo App</h1>
+		<p class="lead">Here is an app to manage all your important task according the timeline</p>
+	  </div>
 	</div>
+		
 		
 	<div class="container mt-4">
 		<form action="add_on/" method="post">
 			{% csrf_token %}
-		  <div class="form-group row">
-			<label  class="col-2 col-form-label ml-2">Add Item: </label>
-			<div class="col-7">
-			  <input type="text" class="form-control-plaintext" name="content" placeholder="enter todo item">
-			</div>
-			<div class="col-2">
-				<input class="btn btn-primary" type="submit" value="Submit">
-			</div>
-		  </div>
-		  	<div class="form-group row">
-				<div class="col-1"></div>
+			<div class="form-group row">
+				<div class="mx-auto">
+					<input class="btn-lg btn-primary" type="submit" value="ADD TASK">
+				</div>
 			</div>
 		</form>	
 	</div>
-	
+		
+		
 	<div class="container mt-4">
 		<ul class="list-group">
-			
-			{% for todo_item in todo_items %}
+			{% for item in todo_items %}
 			<div class="row mt-2">
 				<div class="col-12">
 					<div class="row">
-						<li class="col-10 list-group-item ml-3">{{ todo_item.task_name }}</li>
-						<form action="delete/{{todo_item.id}}/" method="POST">
+						<li class="col-8 list-group-item ml-3">{{ item.task_name }}</li>
+						<form action="update/{{item.id}}" method="POST">
 							{% csrf_token %}
-							<button type="submit" class="col-1 btn btn-outline-danger m-2">Delete</button>
+							<div class="col-2">
+								<button type="submit" class="btn btn-outline-warning m-2">Edit</button>
+							</div>
+							
 						</form>
-						
+						<form action="delete/{{item.id}}/" method="POST">
+							{% csrf_token %}
+							<div class="col-2"></div>
+							<button type="submit" class="btn btn-outline-danger m-2">Delete</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 			{% endfor %}
 		</ul>
-    </div>
+	</div>
 {% endblock %}
